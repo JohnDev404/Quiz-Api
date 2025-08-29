@@ -18,17 +18,20 @@ namespace Quiz_api.Controllers
         public IActionResult Register([FromBody] UserRegister user)
         {
             var manager = new UserManager();
-            var isExisting = manager.IsEmailUnique(user);
-            if (isExisting != null)
-            {
-                return BadRequest(new { Message = isExisting });
-            }
 
+            var isExsistingName = manager.IsNameUnique(user.Name);
+            if (isExsistingName != null)
+                return BadRequest(new { Message = isExsistingName });
+
+            var isExisting = manager.IsEmailUnique(user.Email);
+            if (isExisting != null)
+                return BadRequest(new { Message = isExisting });
+           
+         
             var result = manager.CreateUser(user);
             if (!result)
-            {
                 return BadRequest(new { Message = "Error creating user" });
-            }
+
             return Ok(new { Message = "User created successfully" });
         }
 
@@ -53,6 +56,20 @@ namespace Quiz_api.Controllers
             });
         }
 
+        [HttpPut("Update")]
+        public IActionResult UserUpdate([FromBody] UserData user)
+        {
+            var manager = new UserManager();
+            if (user.Id <= 0)
+                return BadRequest(new { Message = "Id is required for update" });
+            
+            var isokay = manager.UserUpdate(user);
+            if (isokay.Success == false)
+                return BadRequest(new { Message = isokay.Message });
 
+            return Ok(new { Message = "Update successfully" });
+
+
+        }
     }
 }

@@ -20,14 +20,23 @@
         // response
         public class UserData
         {
+            public int Id { get; set; }
             public string Name { get; set; } = null!;
             public string Email { get; set; } = null!;
+            public string? Password { get; set; } = null!;
         }
         public class LoginResult
         {
             public UserData? User { get; set; }
             public string Message { get; set; } = string.Empty;
         }
+
+        public class UpdateResult
+        {
+            public bool Success { get; set; }
+            public string Message { get; set; }
+        }
+
 
     }
 

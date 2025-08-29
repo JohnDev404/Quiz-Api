@@ -24,6 +24,7 @@ var db_password = Environment.GetEnvironmentVariable("DB_PASS");
 var conn = $"Server={db_host};Port={db_port};Database={db_name};Uid={db_user};" +
                 $"Pwd={db_password};Convert Zero Datetime=True";
 
+Console.WriteLine("conn:" + conn);
 BaseManager.ConnectionString = conn;
 
 using var connection = BaseManager.GetConnection();
