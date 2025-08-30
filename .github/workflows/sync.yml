@@ -3,9 +3,7 @@ name: Sync to JohnDev404
 on:
   push:
     branches:
-      - main
       - master
-
 
 jobs:
   sync:
@@ -14,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0   
 
       - name: Push to JohnDev404
         env:
@@ -22,4 +22,4 @@ jobs:
           git config --global user.name "john-andeyyy"
           git config --global user.email "andreinicolas.codebank@gmail.com"
           git remote add johnDev404 https://$TOKEN@github.com/JohnDev404/Quiz-Api.git
-          git push johnDev404 main --force
+          git push johnDev404 master --force
