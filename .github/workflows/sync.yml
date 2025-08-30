@@ -3,7 +3,9 @@ name: Sync to JohnDev404
 on:
   push:
     branches:
-      - main  # branch sa main repo mo na susubaybayan
+      - main
+      - master
+
 
 jobs:
   sync:
